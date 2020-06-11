@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" class="fsvs">
+<head>
+    <meta charset="UTF-8">
+    <title>TravelWise</title>
+    <meta name="description"
+          content="A travel companion to help you choose the right time of year and the best deals for your adventures! Travel smart with travel wise."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--CSS -->
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.css"
+          rel="stylesheet">
+    <link href="./css/travelwise.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@700&display=swap" rel="stylesheet">
+    <!--JS-->
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+            integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="./js/Plugin.Errorbars.min.js"></script>
+    <script src="./js/scolify.js"></script>
+    <script src="./js/index.js"></script>
+    
+</head>
+
+
+<body>
+
+
+<div class="section">
+    <header role="banner" class="position-absolute w-100">
+        <div class="jumbotron bg-transparent text-light m-0 p-3 " id="top-logo">
+            <h1 class="display-4 text-center font-weight-normal">Travel<span class="text-focus">Wise</span></h1>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-navbar-transport position-fixed w-100" id="navbar-container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav1"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav1">
+                <ul class="navbar-nav nav-fill w-100">
+                    <li class="nav-item active" id="home-nav">
+                        <a class="nav-link" onclick="homeClicked()"><span class="nav-border">Home</span></a>
+                    </li>
+                    <li class="nav-item" id="compare-nav">
+                        <a class="nav-link" onclick="compareClicked()">Compare</a>
+                    </li>
+                    <li class="nav-item" id="about-nav">
+                        <a class="nav-link" onclick="aboutClicked()">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="hero section-page">
+        <div class="hero-inner hero-dark hero-inner-anim" id="fancy-anim">
+            <h1 id="test">Don't Just Travel...</h1>
+            <h2>"<span class="text-light">Travel</span> <span class="text-focus">Smart</span> with <span
+                    class="text-light">Travel</span><span class="text-focus">Wise</span>"</h2>
+        </div>
+    </section>
+
+
+    <section class="compare-container section-page">
+        <div class="container h-100" id="holiday-graph-container">
+            <select onchange="cityChanged()" class="form-control form-control-sm w-25 mx-auto select-background " id="city-selector">
+                <option>All</option>
+                <option>London</option>
+                <option>Edinburgh</option>
+                <option>Paris</option>
+                <option>Berlin</option>
+                <option>Amsterdam</option>
+                <option>New York</option>
+            </select>
+
+            <div class="chart-container" style="position: relative; height:80%; width:100%">
+
+
+                <canvas id="holidayChart"></canvas>
+            </div>
+            <button type="button" class="btn btn-light btn-sm disabled float-left position-relative ml-5" ><svg class="bi bi-arrow-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 010 .708L3.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M2.5 8a.5.5 0 01.5-.5h10.5a.5.5 0 010 1H3a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+            </svg></button>
+            <h4 class="switch-text">Switch Graph</h4>
+            <button type="button" class="btn btn-light btn-sm float-right position-relative mr-3" onclick="openTouristGraph()"><svg class="bi bi-arrow-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M2 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H2.5A.5.5 0 012 8z" clip-rule="evenodd"/>
+            </svg> </button>
+        </div>
+        <div class="container h-100 tourist-container" id="tourist-graph-container">
+            <select onchange="cityChangedTourists()" class="form-control form-control-sm w-25 mx-auto select-background " id="city-selector-tourist">
+                <option>London</option>
+                <option>Barcelona</option>
+                <option>Paris</option>
+                <option>Berlin</option>
+                <option>Amsterdam</option>
+                <option>New York</option>
+            </select>
+
+            <div class="chart-container" style="position: relative; height:80%; width:100%">
+
+
+                <canvas id="tourists"></canvas>
+            </div>
+
+            <button type="button" class="btn btn-light btn-sm float-left position-relative ml-5" onclick="openHolidayGraph()"><svg class="bi bi-arrow-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.854 4.646a.5.5 0 010 .708L3.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M2.5 8a.5.5 0 01.5-.5h10.5a.5.5 0 010 1H3a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+            </svg></button>
+            <h4 class="switch-text">Switch Graph</h4>
+            <button type="button" class="btn btn-light btn-sm disabled float-right position-relative mr-3"><svg class="bi bi-arrow-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M2 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H2.5A.5.5 0 012 8z" clip-rule="evenodd"/>
+            </svg> </button>
+        </div>
+    </section>
+
+    <section class="about-container section-page">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="about-text-div col-md-8">
+                    <h1 >About Us</h1>
+                    <p>We are a data visualisation company that aim to provide our clients with incredible presentation of data. </br></br>
+                    Contact us today to get a quote so we can help you become data smart!</p>
+                    <button type="button" class="btn btn-contact">Contact Us</button>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    <div id="tits"></div>
+</div>
+
+</body>
+</html>
